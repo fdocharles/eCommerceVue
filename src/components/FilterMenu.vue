@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row mb-5">
         <div class="col-md-9 order-2">
-          <Items />
+          <Items :items="items" />
         </div>
 
         <div class="col-md-3 order-1 mb-5 mb-md-0">
@@ -74,8 +74,16 @@
 
 <script>
 import Items from "./Items.vue";
+
+var products = localStorage.getItem("products");
+
 export default {
   components: { Items },
   name: "FilterMenu",
+  data() {
+    return {
+      items: products,
+    };
+  },
 };
 </script>

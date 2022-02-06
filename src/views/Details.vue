@@ -1,14 +1,14 @@
 <template>
   <fragment>
-    <BreadCrumb :currentPage="currentPage" previousPage="Home"></BreadCrumb>
+    <BreadCrumb :currentPage="currentPage" previousPage="Shop"></BreadCrumb>
     <div class="site-section">
-      <div class="container">
+      <div v-if="product" class="container">
         <div class="row">
           <div class="col-md-6">
             <img src="images/cloth_1.jpg" alt="Image" class="img-fluid" />
           </div>
           <div class="col-md-6">
-            <h2 class="text-black">Tank Top T-Shirt</h2>
+            <h2 class="text-black">{{ product.name }}</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Pariatur, vitae, explicabo? Incidunt facere, natus soluta dolores
@@ -97,15 +97,32 @@
 </template>
 
 <script>
-import BreadCrumb from '../components/BreadCrumb.vue';
+import BreadCrumb from "../components/BreadCrumb.vue";
+
+var currentProduct = null;
 
 export default {
-  name: 'Details',
+  name: "Details",
   components: { BreadCrumb },
   data() {
     return {
       currentPage: this.$route.params.id,
+      product: JSON.parse(localStorage.getItem("products")).filter(
+        (x) => x.id == this.$route.params.id
+      )[0],
     };
   },
+  // created() {
+  //   var products = localStorage.getItem("products");
+  //   if (products) {
+  //     this.product = JSON.parse(products).filter(
+  //       (x) => x.id == this.$route.params.id
+  //     );
+  //   }
+
+  //   this.product = {};
+
+  //   console.log(111, this.product[0].name);
+  // },
 };
 </script>

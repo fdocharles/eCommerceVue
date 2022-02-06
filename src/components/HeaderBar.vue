@@ -56,8 +56,10 @@ export default {
     MenuBar,
     Login,
   },
-  data: {
-    isLoginVisible: false,
+  data() {
+    return {
+      isLoginVisible: false,
+    };
   },
   methods: {
     showLogin() {

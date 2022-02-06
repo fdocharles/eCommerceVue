@@ -4,8 +4,8 @@ body {
   color: #8c92a0;
   font-weight: 300;
   font-size: 16px;
-  font-family: "Poppins", sans-serif;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
 }
 
@@ -37,7 +37,7 @@ a:hover {
   -o-transition: 0.3s all ease-in-out;
   transition: 0.3s all ease-in-out;
   background: rgba(0, 0, 0, 0.6);
-  content: "";
+  content: '';
   position: absolute;
   z-index: 2000;
   top: 0;
@@ -128,7 +128,7 @@ a:hover {
   position: relative;
 }
 .site-section-heading:before {
-  content: "";
+  content: '';
   left: 0%;
   top: 0;
   position: absolute;
@@ -137,7 +137,7 @@ a:hover {
   background: #7971ea;
 }
 .site-section-heading.text-center:before {
-  content: "";
+  content: '';
   left: 50%;
   top: 0;
   -webkit-transform: translateX(-50%);
@@ -250,8 +250,8 @@ a:hover {
   border-radius: 50%;
   display: block;
   text-align: center;
-  background: #7971ea;
-  color: #fff;
+  background: #fdb819;
+  color: #000;
   -webkit-transition: 0.2s all ease-in-out;
   -o-transition: 0.2s all ease-in-out;
   transition: 0.2s all ease-in-out;
@@ -309,7 +309,7 @@ a:hover {
 }
 .site-navbar .site-navigation .site-menu .has-children > a:before {
   position: absolute;
-  content: "\e313";
+  content: '\e313';
   font-size: 16px;
   top: 50%;
   right: 0;
@@ -375,7 +375,7 @@ a:hover {
   .dropdown
   > li.has-children
   > a:before {
-  content: "\e315";
+  content: '\e315';
   right: 20px;
 }
 .site-navbar
@@ -555,7 +555,7 @@ a:hover {
 .site-mobile-menu .site-nav-wrap .arrow-collapse:before {
   font-size: 12px;
   z-index: 20;
-  content: "\f078";
+  content: '\f078';
   position: absolute;
   top: 50%;
   left: 50%;
@@ -643,7 +643,7 @@ a:hover {
   position: relative;
 }
 .site-blocks-1 .divider:after {
-  content: "";
+  content: '';
   position: absolute;
   height: 100%;
   width: 1px;
@@ -675,7 +675,7 @@ a:hover {
 }
 .site-blocks-2 .block-2-item:before {
   z-index: 1;
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 0;
@@ -816,7 +816,7 @@ a:hover {
 }
 .block-5 ul li:before {
   top: 0;
-  content: "";
+  content: '';
   position: absolute;
   left: 0;
   font-size: 20px;
@@ -824,13 +824,13 @@ a:hover {
   color: #7971ea;
 }
 .block-5 ul li.address:before {
-  content: "\e8b4";
+  content: '\e8b4';
 }
 .block-5 ul li.email:before {
-  content: "\f0e0";
+  content: '\f0e0';
 }
 .block-5 ul li.phone:before {
-  content: "\f095";
+  content: '\f095';
 }
 
 .block-6 {
@@ -1060,4 +1060,32 @@ a:hover {
 
 .item-card-price {
   color: #000;
+}
+
+.customize-btn {
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: #000;
+  background-color: #fdb819;
+  border-color: #fdb819;
+}
+
+.customize-btn :hover {
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: #000;
+  background-color: #fdb819;
+  border-color: #fdb819;
+}
+
+.icon-color {
+  color: #fff;
+}
+
+.cus-btn-outline-primary {
+}
+.cus-btn-outline-primary :hover {
+  background-color: #fdb819;
 }

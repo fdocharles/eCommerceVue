@@ -12,9 +12,8 @@
       <div>
         <p class="mb-0 item-card-category-text">Angle Grinders</p>
         <p class="item-card-header">
-          <router-link :to="{ name: 'Details', params: { id: 12 } }">
-            SPORT BODY PARTS FO SHEVROLET 2015-2017 >
-          </router-link>
+          <a href="/shop/2">SPORT BODY PARTS FO SHEVROLET 2015-2017</a>
+          >
         </p>
         <p class="item-card-rating-wrapper">
           <span class="fa fa-star rating-star-checked"></span>
@@ -31,6 +30,6 @@
 
 <script>
 export default {
-  name: "ItemCard",
+  name: 'ItemCard',
 };
 </script>

@@ -34,7 +34,7 @@
                       <div class="input-group mb-3" style="max-width: 120px">
                         <div class="input-group-prepend">
                           <button
-                            class="btn btn-outline-primary js-btn-minus"
+                            class="btn cus-btn-outline-primary js-btn-minus"
                             type="button"
                           >
                             &minus;
@@ -50,7 +50,7 @@
                         />
                         <div class="input-group-append">
                           <button
-                            class="btn btn-outline-primary js-btn-plus"
+                            class="btn cus-btn-outline-primary js-btn-plus"
                             type="button"
                           >
                             &plus;
@@ -59,7 +59,7 @@
                       </div>
                     </td>
                     <td>$49.00</td>
-                    <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                    <td><a href="#" class="btn customize-btn btn-sm">X</a></td>
                   </tr>
 
                   <tr>
@@ -103,7 +103,7 @@
                       </div>
                     </td>
                     <td>$49.00</td>
-                    <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
+                    <td><a href="#" class="btn customize-btn btn-sm">X</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -114,14 +114,16 @@
           <div class="col-md-6">
             <div class="row mb-5">
               <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-sm btn-block">
+                <button class="btn customize-btn btn-sm btn-block">
                   Update Cart
                 </button>
               </div>
               <div class="col-md-6">
-                <button class="btn btn-outline-primary btn-sm btn-block">
-                  Continue Shopping
-                </button>
+                <a href="/shop">
+                  <button class="btn btn-outline-primary btn-sm btn-block">
+                    Continue Shopping
+                  </button>
+                </a>
               </div>
             </div>
             <div class="row">
@@ -138,7 +140,7 @@
                 />
               </div>
               <div class="col-md-4">
-                <button class="btn btn-primary btn-sm">Apply Coupon</button>
+                <button class="btn customize-btn btn-sm">Apply Coupon</button>
               </div>
             </div>
           </div>
@@ -170,10 +172,10 @@
                 <div class="row">
                   <div class="col-md-12">
                     <button
-                      class="btn btn-primary btn-lg py-3 btn-block"
+                      class="btn customize-btn btn-lg py-3 btn-block"
                       onclick="window.location='checkout.html'"
                     >
-                      Proceed To Checkout
+                      Place Order
                     </button>
                   </div>
                 </div>
@@ -187,10 +189,10 @@
 </template>
 
 <script>
-import BreadCrumb from "../components/BreadCrumb.vue";
+import BreadCrumb from '../components/BreadCrumb.vue';
 
 export default {
-  name: "Cart",
+  name: 'Cart',
   components: {
     BreadCrumb,
   },

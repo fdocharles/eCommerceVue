@@ -1,5 +1,7 @@
 <template>
-  <header-bar />
+  <fragment>
+    <header-bar />
+  </fragment>
 </template>
 
 <script>

@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import Footer from "./components/Footer.vue";
-import startup from "./components/Startup.vue";
+import Footer from './components/Footer.vue';
+import startup from './components/Startup.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: { startup, Footer },
 };
 </script>

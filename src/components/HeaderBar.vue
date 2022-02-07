@@ -16,55 +16,40 @@
               </div>
             </div>
 
-            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
-              <div class="site-top-icons">
-                <ul>
-                  <li @click="showLogin">
-                    <a href="#"
-                      ><span class="icon icon-person icon-color"></span
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="/cart" class="site-cart">
-                      <span class="icon icon-shopping_cart icon-color"></span>
-                      <span class="count">2</span>
-                    </a>
-                  </li>
-                  <li class="d-inline-block d-md-none ml-md-0">
-                    <a href="#" class="site-menu-toggle js-menu-toggle"
-                      ><span class="icon-menu"></span
-                    ></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <header-bar-controls
+              v-on:updateCartCount="updateCartCount"
+              :user="user"
+            />
           </div>
         </div>
       </div>
       <menu-bar />
     </header>
-    <Login :isLoginVisible="isLoginVisible" />
   </fragment>
 </template>
 
 <script>
 import MenuBar from "./MenuBar.vue";
 import Login from "./Login.vue";
+import HeaderBarControls from "./HeaderBarControls.vue";
+
 export default {
   name: "HeaderBar",
+  props: ["user"],
   components: {
     MenuBar,
     Login,
+    HeaderBarControls,
   },
   data() {
     return {
-      isLoginVisible: false,
+      cartCount: 0,
     };
   },
   methods: {
-    showLogin() {
-      console.log("sssss");
-      this.isLoginVisible = true;
+    updateCartCount() {
+      var length = JSON.parse(localStorage.getItem("cart")).length;
+      this.cartCount = length > 0 ? length : 0;
     },
   },
 };

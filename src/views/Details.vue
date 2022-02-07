@@ -1,5 +1,6 @@
 <template>
   <fragment>
+    <header-bar v-if="isLoggedIn" />
     <BreadCrumb :currentPage="currentPage" previousPage="Shop"></BreadCrumb>
     <div class="site-section">
       <div v-if="product" class="container">
@@ -111,6 +112,10 @@
             </p>
           </div>
         </div>
+        <br />
+        <br />
+        <br />
+        <reviews />
       </div>
     </div>
   </fragment>
@@ -118,13 +123,15 @@
 
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
+import HeaderBar from "../components/HeaderBar.vue";
+import Reviews from "../components/Reviews.vue";
 import json from "../data/data.json";
 
 var currentProduct = null;
 
 export default {
   name: "Details",
-  components: { BreadCrumb },
+  components: { BreadCrumb, Reviews, HeaderBar },
   data() {
     return {
       currentPage: this.$route.params.id,
@@ -132,6 +139,7 @@ export default {
       size: "",
       qty: 0,
       isAddToCartDisabled: true,
+      isLoggedIn: false,
     };
   },
   methods: {
@@ -153,6 +161,7 @@ export default {
         image: this.product.image,
         name: this.product.name,
         price: this.product.price,
+        total: this.product.price * this.qty,
       };
 
       if (cart) {
@@ -169,10 +178,19 @@ export default {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
+      this.$.emit("updateCartCount");
     },
     udapteAddToCartBtn() {
       this.isAddToCartDisabled = this.qty > 0 && this.size ? false : true;
     },
+  },
+  created() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
   },
 };
 </script>

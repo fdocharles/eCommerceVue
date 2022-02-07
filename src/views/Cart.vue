@@ -1,10 +1,11 @@
 <template>
   <fragment>
+    <header-bar v-if="isLoggedIn" :user="accountName" />
     <BreadCrumb previousPage="Home" currentPage="Cart" />
     <div class="site-section">
-      <div class="container">
+      <div v-if="cartItems.length > 0" class="container">
         <div class="row mb-5">
-          <form class="col-md-12" method="post">
+          <div class="col-md-12">
             <div class="site-blocks-table">
               <table class="table table-bordered">
                 <thead>
@@ -18,12 +19,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="item in cartItems" :key="item.id">
+                  <tr v-for="(item, i) in cartItems" :key="i">
                     <td class="product-thumbnail">
                       <img
-                        src="images/cloth_1.jpg"
+                        v-bind:src="item.image"
                         alt="Image"
                         class="img-fluid"
+                        style="height: 120px"
                       />
                     </td>
                     <td class="product-name">
@@ -34,8 +36,9 @@
                       <div class="input-group mb-3" style="max-width: 120px">
                         <div class="input-group-prepend">
                           <button
-                            class="btn cus-btn-outline-primary js-btn-minus"
+                            class="btn cus-btn-outline-primary"
                             type="button"
+                            @click="minusQty(i)"
                           >
                             &minus;
                           </button>
@@ -43,60 +46,46 @@
                         <input
                           type="text"
                           class="form-control text-center"
-                          value="1"
+                          v-bind:value="item.qty"
                           placeholder=""
                           aria-label="Example text with button addon"
                           aria-describedby="button-addon1"
                         />
                         <div class="input-group-append">
                           <button
-                            class="btn cus-btn-outline-primary js-btn-plus"
+                            class="btn cus-btn-outline-primary"
                             type="button"
+                            @click="plusQty(i)"
                           >
                             &plus;
                           </button>
                         </div>
                       </div>
                     </td>
-                    <td>$49.00</td>
-                    <td><a href="#" class="btn customize-btn btn-sm">X</a></td>
+                    <td>${{ (item.price * item.qty).toFixed(2) }}</td>
+                    <td>
+                      <button
+                        @click="removeItem(item.id)"
+                        class="btn customize-btn btn-sm"
+                      >
+                        X
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </form>
+          </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="row mb-5">
-              <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn customize-btn btn-sm btn-block">
-                  Update Cart
-                </button>
-              </div>
               <div class="col-md-6">
                 <a href="/shop">
-                  <button class="btn btn-outline-primary btn-sm btn-block">
+                  <button class="btn customize-btn btn-sm btn-block">
                     Continue Shopping
                   </button>
                 </a>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <label class="text-black h4" for="coupon">Coupon</label>
-                <p>Enter your coupon code if you have one.</p>
-              </div>
-              <div class="col-md-8 mb-3 mb-md-0">
-                <input
-                  type="text"
-                  class="form-control py-3"
-                  id="coupon"
-                  placeholder="Coupon Code"
-                />
-              </div>
-              <div class="col-md-4">
-                <button class="btn customize-btn btn-sm">Apply Coupon</button>
               </div>
             </div>
           </div>
@@ -113,7 +102,15 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">${{ getSubTotal }}</strong>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <span class="text-black">HST</span>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <strong class="text-black">${{ getTax }}</strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -121,7 +118,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">${{ getTotal }}</strong>
                   </div>
                 </div>
 
@@ -140,43 +137,93 @@
           </div>
         </div>
       </div>
+      <div v-else class="container text-center">
+        <h3 class="text-black h4 text-uppercase">Your cart is empty</h3>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+          <a href="/shop" class="col-md-6 offset-md-3">
+            <button class="btn customize-btn btn-sm btn-block">
+              Continue Shopping
+            </button>
+          </a>
+        </div>
+      </div>
     </div>
   </fragment>
 </template>
 
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
+import HeaderBar from "../components/HeaderBar.vue";
 import json from "./../data/data.json";
 
 export default {
   name: "Cart",
   components: {
     BreadCrumb,
+    HeaderBar,
   },
   data() {
     return {
       cartItems: [],
+      isLoggedIn: false,
+      accountName: "",
     };
   },
+  computed: {
+    getSubTotal: function () {
+      return this.cartItems
+        .reduce((acc, curr) => {
+          return acc + curr.price * curr.qty;
+        }, 0.0)
+        .toFixed(2);
+    },
+    getTax: function () {
+      var subTotal2 = this.cartItems.reduce((acc, curr) => {
+        return acc + curr.price * curr.qty;
+      }, 0.0);
+
+      return ((subTotal2 / 100) * 13).toFixed(2);
+    },
+    getTotal: function () {
+      var subTotal1 = this.cartItems.reduce((acc, curr) => {
+        return acc + curr.price * curr.qty;
+      }, 0.0);
+      return (subTotal1 + (subTotal1 / 100) * 13).toFixed(2);
+    },
+  },
+  methods: {
+    minusQty(i) {
+      if (this.cartItems[i].qty > 0) {
+        this.cartItems[i].qty -= 1;
+      }
+    },
+    plusQty(i) {
+      this.cartItems[i].qty += 1;
+    },
+    removeItem(id) {
+      this.cartItems = this.cartItems.filter((x) => {
+        return x.id != id;
+      });
+
+      localStorage.setItem("cart", JSON.stringify(this.cartItems));
+    },
+  },
   created() {
-    var items = JSON.parse(localStorage.getItem("cart"));
-    var dataCartItems = [];
-    // if (items && items.length > 0) {
-    //   dataCartItems = items.map(function (x) {
-    //     console.log(json);
-    //     return {
-    //       ...json.filter((a) => {
-    //         a.id == x.id;
-    //       }),
-    //       qty: x.qty,
-    //       size: x.qty,
-    //     };
-    //   });
-    // }
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.isLoggedIn = true;
+      this.accountName = user.name;
+    } else {
+      this.isLoggedIn = false;
+      this.accountName = "";
+    }
 
-    console.log(11, items);
+    console.log("user", user);
 
-    // this.cartItems = dataCartItems;
+    this.cartItems = JSON.parse(localStorage.getItem("cart"));
   },
 };
 </script>

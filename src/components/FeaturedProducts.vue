@@ -9,93 +9,40 @@
       <div class="row">
         <div class="col-md-12">
           <div class="nonloop-block-3 owl-carousel owl-loaded owl-drag">
-            <template v-for="product in featuredProducts">
-              <featured-item-card
-                :category="product.Category"
-                :title="product.Title"
-                :price="product.Price"
-                :rating="product.Rating"
-                :image="product.Image"
-                v-bind:key="product.Title"
-              />
-            </template>
-            <div class="item">
+            <div
+              v-for="item in featuredProducts"
+              class="item"
+              v-bind:key="item.id"
+            >
               <div class="block-4 text-center">
                 <figure class="block-4-image">
-                  <img
-                    src="images/cloth_1.jpg"
-                    alt="Image placeholder"
-                    class="img-fluid"
-                  />
+                  <a v-bind:href="redirect(item.id)"
+                    ><img
+                      v-bind:src="item.image"
+                      alt="Image placeholder"
+                      class="img-fluid"
+                  /></a>
                 </figure>
-                <div class="block-4-text p-4">
-                  <h3><a href="#">Tank Top</a></h3>
-                  <p class="mb-0">Finding perfect t-shirt</p>
-                  <p class="text-primary font-weight-bold">$50</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="block-4 text-center">
-                <figure class="block-4-image">
-                  <img
-                    src="images/shoe_1.jpg"
-                    alt="Image placeholder"
-                    class="img-fluid"
-                  />
-                </figure>
-                <div class="block-4-text p-4">
-                  <h3><a href="#">Corater</a></h3>
-                  <p class="mb-0">Finding perfect products</p>
-                  <p class="text-primary font-weight-bold">$50</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="block-4 text-center">
-                <figure class="block-4-image">
-                  <img
-                    src="images/cloth_2.jpg"
-                    alt="Image placeholder"
-                    class="img-fluid"
-                  />
-                </figure>
-                <div class="block-4-text p-4">
-                  <h3><a href="#">Polo Shirt</a></h3>
-                  <p class="mb-0">Finding perfect products</p>
-                  <p class="text-primary font-weight-bold">$50</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="block-4 text-center">
-                <figure class="block-4-image">
-                  <img
-                    src="images/cloth_3.jpg"
-                    alt="Image placeholder"
-                    class="img-fluid"
-                  />
-                </figure>
-                <div class="block-4-text p-4">
-                  <h3><a href="#">T-Shirt Mockup</a></h3>
-                  <p class="mb-0">Finding perfect products</p>
-                  <p class="text-primary font-weight-bold">$50</p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="block-4 text-center">
-                <figure class="block-4-image">
-                  <img
-                    src="images/shoe_1.jpg"
-                    alt="Image placeholder"
-                    class="img-fluid"
-                  />
-                </figure>
-                <div class="block-4-text p-4">
-                  <h3><a href="#">Corater</a></h3>
-                  <p class="mb-0">Finding perfect products</p>
-                  <p class="text-primary font-weight-bold">$50</p>
+                <div>
+                  <p class="mb-0 item-card-category-text">
+                    {{ item.category }}
+                  </p>
+                  <p class="item-card-header">
+                    <a v-bind:href="redirect(item.id)">{{ item.name }}</a>
+                  </p>
+                  <p class="item-card-rating-wrapper">
+                    <span
+                      v-for="index in 5"
+                      :key="index"
+                      class="fa fa-star"
+                      v-bind:class="[
+                        index <= item.rating ? 'rating-star-checked' : '',
+                      ]"
+                    ></span>
+                  </p>
+                  <p class="font-weight-bold item-card-price">
+                    $ {{ item.price }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -108,6 +55,7 @@
 
 <script>
 import FeaturedItemCard from "./FeaturedItemCard.vue";
+import json from "./../data/data.json";
 
 var fProducts = [
   {
@@ -125,8 +73,13 @@ export default {
   name: "FeaturedProduct",
   data() {
     return {
-      featuredProducts: fProducts,
+      featuredProducts: json.filter((x) => x.featured),
     };
+  },
+  methods: {
+    redirect(id) {
+      return "/shop/" + id;
+    },
   },
 };
 </script>

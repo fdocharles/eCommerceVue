@@ -19,7 +19,7 @@
             <div class="form-group">
               <input type="password" class="form-control" id="password1" placeholder="Your password...">
             </div>
-            <button type="button" class="btn btn-info btn-block btn-round">Login</button>
+            <button type="button" class="btn btn-info btn-block btn-round yellow-color-bg">Login</button>
           </form>
           
           <div class="text-center text-muted delimiter">or use a social network</div>

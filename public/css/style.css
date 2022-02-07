@@ -201,14 +201,31 @@ a:hover {
 .site-navbar .site-search-icon a:hover {
   text-decoration: none;
 }
-.site-navbar .site-logo a {
+.site-logo a {
   text-transform: uppercase;
-  color: #25262a;
+  color: #fff;
   letter-spacing: 0.2em;
   font-size: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border: 2px solid #25262a;
+  padding: 10px;
+  border: 2px solid #b8bac3;
+}
+
+.site-logo-login a {
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: 0.2em;
+  font-size: 20px;
+  padding: 10px;
+  border: 2px solid #22d940;
+}
+
+.site-navbar .site-logo a {
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.2em;
+  font-size: 20px;
+  padding: 10px;
+  border: 2px solid #b8bac3;
 }
 .site-navbar .site-logo a:hover {
   text-decoration: none;
@@ -1030,6 +1047,58 @@ a:hover {
   margin-bottom: 20px;
 }
 
+.login-container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.login-form-1 {
+  padding: 5%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-1 h3 {
+  text-align: center;
+  color: #333;
+}
+.login-form-2 {
+  padding: 5%;
+  background: #0062cc;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-2 h3 {
+  text-align: center;
+  color: #fff;
+}
+.login-container form {
+  padding: 10%;
+}
+.btnSubmit {
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+}
+.login-form-1 .btnSubmit {
+  font-weight: 600;
+  color: #fff;
+  background-color: #0062cc;
+}
+.login-form-2 .btnSubmit {
+  font-weight: 600;
+  color: #0062cc;
+  background-color: #fff;
+}
+.login-form-2 .ForgetPwd {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.login-form-1 .ForgetPwd {
+  color: #0062cc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 .site-navigation-bg {
   background-color: #fdb819;
 }
@@ -1049,6 +1118,10 @@ a:hover {
 
 .rating-star-checked {
   color: #fdb819;
+}
+
+.yellow-color-bg {
+  background-color: #fdb819;
 }
 
 .item-card-header {
@@ -1089,4 +1162,11 @@ a:hover {
 }
 .cus-btn-outline-primary :hover {
   background-color: #fdb819;
+}
+
+.review {
+  padding: 30px;
+}
+
+.account-user {
 }

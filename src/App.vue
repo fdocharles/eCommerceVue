@@ -1,18 +1,30 @@
 <template>
   <fragment>
-    <startup />
     <router-view />
-    <Footer />
+    <Footer v-if="isLoggedIn" />
   </fragment>
 </template>
 
 <script>
-import Footer from './components/Footer.vue';
-import startup from './components/Startup.vue';
+import Footer from "./components/Footer.vue";
+import startup from "./components/Startup.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: { startup, Footer },
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  created() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  },
 };
 </script>
 

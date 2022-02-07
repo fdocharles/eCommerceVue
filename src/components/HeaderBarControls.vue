@@ -1,0 +1,31 @@
+<template>
+  <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+    <div class="site-top-icons">
+      <ul>
+        <li>
+          <a href="/account"
+            ><span class="icon icon-person icon-color"></span
+            >{{ user ? "Hi " + user : "" }}</a
+          >
+        </li>
+        <li>
+          <a href="/cart" class="site-cart">
+            <span class="icon icon-shopping_cart icon-color"></span>
+            <!-- <span class="count">2</span> -->
+          </a>
+        </li>
+        <li class="d-inline-block d-md-none ml-md-0">
+          <a href="#" class="site-menu-toggle js-menu-toggle"
+            ><span class="icon-menu"></span
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "HeaderBarControls",
+  props: ["user"],
+};
+</script>

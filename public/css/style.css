@@ -182,11 +182,11 @@ a:hover {
   background: transparent;
 }
 .site-navbar .site-navbar-top {
-  border-bottom: 1px solid #212121;
+  border-bottom: 1px solid #fff;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-bottom: 0px;
-  background-color: #212121;
+  background-color: #fff;
 }
 @media (min-width: 768px) {
   .site-navbar .site-navbar-top {
@@ -221,11 +221,11 @@ a:hover {
 
 .site-navbar .site-logo a {
   text-transform: uppercase;
-  color: #fff;
+  color: #000;
   letter-spacing: 0.2em;
   font-size: 20px;
   padding: 10px;
-  border: 2px solid #b8bac3;
+  border: 2px solid #000;
 }
 .site-navbar .site-logo a:hover {
   text-decoration: none;

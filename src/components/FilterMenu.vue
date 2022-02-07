@@ -75,7 +75,7 @@
 <script>
 import Items from "./Items.vue";
 
-var products = localStorage.getItem("products");
+//var products = localStorage.getItem("products");
 
 export default {
   components: { Items },

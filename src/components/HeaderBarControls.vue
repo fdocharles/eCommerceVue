@@ -4,13 +4,19 @@
       <ul>
         <li>
           <a href="/account"
-            ><span class="icon icon-person icon-color"></span
+            ><span
+              class="icon icon-person icon-color"
+              style="color: black; font-size: 30px"
+            ></span
             >{{ user ? "Hi " + user : "" }}</a
           >
         </li>
         <li>
           <a href="/cart" class="site-cart">
-            <span class="icon icon-shopping_cart icon-color"></span>
+            <span
+              class="icon icon-shopping_cart icon-color"
+              style="color: black; font-size: 30px"
+            ></span>
             <!-- <span class="count">2</span> -->
           </a>
         </li>

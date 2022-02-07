@@ -9,6 +9,7 @@
           <a href="/">Home</a>
         </li>
         <li><a href="/shop">Shop</a></li>
+        <li><a>Contact us</a></li>
       </ul>
     </div>
   </nav>

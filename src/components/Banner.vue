@@ -1,8 +1,7 @@
 <template>
   <div
     class="site-blocks-cover"
-    style="background-image: url(images/hero_1.jpg)"
-  >
+    style="background-image: url(images/The-Future-of-Commerce-is-Shoppable-Ads.jpg)">
     <div class="container">
       <div
         class="row align-items-start align-items-md-center justify-content-end"

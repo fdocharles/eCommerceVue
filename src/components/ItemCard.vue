@@ -1,14 +1,12 @@
 <template>
-  <div class="col-sm-6 col-lg-4 mb-4 item-card" data-aos="fade-up">
+  <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
     <div class="block-4">
       <figure class="block-4-image">
-        <a v-bind:href="redirect(id)"
-          ><img
-            src="https://chromium.themes.zone/toolshop/wp-content/uploads/sites/14/2017/06/prod_3-300x300.jpg"
-            alt="Image placeholder"
-            class="img-fluid"
-        /></a>
-      </figure>
+        <a href="shop-single.html">
+          <img v-bind:src="image" alt="Image placeholder"
+            class="img-fluid"/>
+        </a>
+      </figure>       
       <div>
         <p class="mb-0 item-card-category-text">{{ category }}</p>
         <p class="item-card-header">
@@ -22,7 +20,7 @@
             v-bind:class="[index <= rating ? 'rating-star-checked' : '']"
           ></span>
         </p>
-        <p class="font-weight-bold item-card-price">$ {{ price }}</p>
+        <p class="font-weight-bold item-card-price">${{ price }}</p>
       </div>
     </div>
   </div>
@@ -31,12 +29,8 @@
 <script>
 export default {
   name: "ItemCard",
-  props: ["id", "name", "category", "price", "rating"],
-  data() {
-    return {
-      item: this.itemprop,
-    };
-  },
+  props: ["id", "name" , "image" , "category" , "rating" , "description" , "price"],
+  
   computed: {},
   methods: {
     redirect(id) {
@@ -44,7 +38,7 @@ export default {
     },
   },
   created() {
-    console.log(this.itemprop);
+    //console.log(this.itemprop);
   },
 };
 </script>

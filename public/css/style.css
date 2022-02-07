@@ -216,7 +216,8 @@ a:hover {
   letter-spacing: 0.2em;
   font-size: 20px;
   padding: 10px;
-  border: 2px solid #22d940;
+  /* border: 2px solid #22d940; */
+  background-color: #fff;
 }
 
 .site-navbar .site-logo a {

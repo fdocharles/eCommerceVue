@@ -29,11 +29,11 @@
                       />
                     </td>
                     <td class="product-name">
-                      <h2 class="h5 text-black">Top Up T-Shirt</h2>
+                      <h2 class="h5 text-black" style="text-align:left">{{item.name}}</h2>
                     </td>
                     <td>$ {{ item.price }}</td>
                     <td>
-                      <div class="input-group mb-3" style="max-width: 120px">
+                      <div class="input-group mb-3" style="max-width: 120px;text-align:center">
                         <div class="input-group-prepend">
                           <button
                             class="btn cus-btn-outline-primary"

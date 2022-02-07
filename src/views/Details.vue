@@ -5,29 +5,27 @@
       <div v-if="product" class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="images/cloth_1.jpg" alt="Image" class="img-fluid" />
+            <img v-bind:src="product.image" alt="Image" class="img-fluid" />
           </div>
           <div class="col-md-6">
             <h2 class="text-black">{{ product.name }}</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Pariatur, vitae, explicabo? Incidunt facere, natus soluta dolores
-              iusto! Molestiae expedita veritatis nesciunt doloremque sint
-              asperiores fuga voluptas, distinctio, aperiam, ratione dolore.
+              {{ product.description }}
             </p>
-            <p class="mb-4">
-              Ex numquam veritatis debitis minima quo error quam eos dolorum
-              quidem perferendis. Quos repellat dignissimos minus, eveniet nam
-              voluptatibus molestias omnis reiciendis perspiciatis illum hic
-              magni iste, velit aperiam quis.
+            <p>
+              <strong class="text-primary h4">$ {{ product.price }}</strong>
             </p>
-            <p><strong class="text-primary h4">$50.00</strong></p>
             <div class="mb-1 d-flex">
               <label for="option-sm" class="d-flex mr-3 mb-3">
                 <span
                   class="d-inline-block mr-2"
                   style="top: -2px; position: relative"
-                  ><input type="radio" id="option-sm" name="shop-sizes"
+                  ><input
+                    type="radio"
+                    id="option-sm"
+                    name="shop-sizes"
+                    value="small"
+                    v-model="size"
                 /></span>
                 <span class="d-inline-block text-black">Small</span>
               </label>
@@ -35,7 +33,12 @@
                 <span
                   class="d-inline-block mr-2"
                   style="top: -2px; position: relative"
-                  ><input type="radio" id="option-md" name="shop-sizes"
+                  ><input
+                    type="radio"
+                    id="option-md"
+                    name="shop-sizes"
+                    value="medium"
+                    v-model="size"
                 /></span>
                 <span class="d-inline-block text-black">Medium</span>
               </label>
@@ -43,7 +46,12 @@
                 <span
                   class="d-inline-block mr-2"
                   style="top: -2px; position: relative"
-                  ><input type="radio" id="option-lg" name="shop-sizes"
+                  ><input
+                    type="radio"
+                    id="option-lg"
+                    name="shop-sizes"
+                    value="large"
+                    v-model="size"
                 /></span>
                 <span class="d-inline-block text-black">Large</span>
               </label>
@@ -51,7 +59,12 @@
                 <span
                   class="d-inline-block mr-2"
                   style="top: -2px; position: relative"
-                  ><input type="radio" id="option-xl" name="shop-sizes"
+                  ><input
+                    type="radio"
+                    id="option-xl"
+                    name="shop-sizes"
+                    value="extraLarge"
+                    v-model="size"
                 /></span>
                 <span class="d-inline-block text-black"> Extra Large</span>
               </label>
@@ -60,8 +73,9 @@
               <div class="input-group mb-3" style="max-width: 120px">
                 <div class="input-group-prepend">
                   <button
-                    class="btn btn-outline-primary js-btn-minus"
+                    class="btn btn-outline-primary"
                     type="button"
+                    @click="minusQty"
                   >
                     &minus;
                   </button>
@@ -73,11 +87,13 @@
                   placeholder=""
                   aria-label="Example text with button addon"
                   aria-describedby="button-addon1"
+                  v-model="qty"
                 />
                 <div class="input-group-append">
                   <button
-                    class="btn btn-outline-primary js-btn-plus"
+                    class="btn btn-outline-primary"
                     type="button"
+                    @click="plusQty"
                   >
                     &plus;
                   </button>
@@ -85,9 +101,13 @@
               </div>
             </div>
             <p>
-              <a href="cart.html" class="buy-now btn btn-sm customize-btn"
-                >Add To Cart</a
+              <button
+                @click="AddProduct"
+                class="[buy-now btn btn-sm customize-btn"
+                :class="{ disabled: isAddToCartDisabled }"
               >
+                Add To Cart
+              </button>
             </p>
           </div>
         </div>
@@ -98,6 +118,7 @@
 
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
+import json from "../data/data.json";
 
 var currentProduct = null;
 
@@ -107,22 +128,51 @@ export default {
   data() {
     return {
       currentPage: this.$route.params.id,
-      product: JSON.parse(localStorage.getItem("products")).filter(
-        (x) => x.id == this.$route.params.id
-      )[0],
+      product: json.filter((x) => x.id == this.$route.params.id)[0],
+      size: "",
+      qty: 0,
+      isAddToCartDisabled: true,
     };
   },
-  // created() {
-  //   var products = localStorage.getItem("products");
-  //   if (products) {
-  //     this.product = JSON.parse(products).filter(
-  //       (x) => x.id == this.$route.params.id
-  //     );
-  //   }
+  methods: {
+    minusQty() {
+      if (this.qty > 0) this.qty -= 1;
 
-  //   this.product = {};
+      this.udapteAddToCartBtn();
+    },
+    plusQty() {
+      this.qty += 1;
+      this.udapteAddToCartBtn();
+    },
+    AddProduct() {
+      var cart = localStorage.getItem("cart");
+      var currProduct = {
+        id: this.$route.params.id,
+        size: this.size,
+        qty: this.qty,
+        image: this.product.image,
+        name: this.product.name,
+        price: this.product.price,
+      };
 
-  //   console.log(111, this.product[0].name);
-  // },
+      if (cart) {
+        cart = JSON.parse(cart);
+
+        cart = [
+          ...cart.filter((x) => {
+            return x.id != currProduct.id;
+          }),
+          currProduct,
+        ];
+      } else {
+        cart = [currProduct];
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+    },
+    udapteAddToCartBtn() {
+      this.isAddToCartDisabled = this.qty > 0 && this.size ? false : true;
+    },
+  },
 };
 </script>

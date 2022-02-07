@@ -3,10 +3,7 @@
     <div class="block-4">
       <figure class="block-4-image">
         <a v-bind:href="redirect(id)"
-          ><img
-            src="https://chromium.themes.zone/toolshop/wp-content/uploads/sites/14/2017/06/prod_3-300x300.jpg"
-            alt="Image placeholder"
-            class="img-fluid"
+          ><img v-bind:src="image" alt="Image placeholder" class="img-fluid"
         /></a>
       </figure>
       <div>
@@ -31,7 +28,7 @@
 <script>
 export default {
   name: "ItemCard",
-  props: ["id", "name", "category", "price", "rating"],
+  props: ["id", "name", "category", "price", "rating", "image"],
   data() {
     return {
       item: this.itemprop,
@@ -41,6 +38,9 @@ export default {
   methods: {
     redirect(id) {
       return "/shop/" + id;
+    },
+    getImage() {
+      return this.props.image;
     },
   },
   created() {

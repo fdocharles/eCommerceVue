@@ -18,7 +18,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr v-for="item in cartItems" :key="item.id">
                     <td class="product-thumbnail">
                       <img
                         src="images/cloth_1.jpg"
@@ -29,7 +29,7 @@
                     <td class="product-name">
                       <h2 class="h5 text-black">Top Up T-Shirt</h2>
                     </td>
-                    <td>$49.00</td>
+                    <td>$ {{ item.price }}</td>
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px">
                         <div class="input-group-prepend">
@@ -51,50 +51,6 @@
                         <div class="input-group-append">
                           <button
                             class="btn cus-btn-outline-primary js-btn-plus"
-                            type="button"
-                          >
-                            &plus;
-                          </button>
-                        </div>
-                      </div>
-                    </td>
-                    <td>$49.00</td>
-                    <td><a href="#" class="btn customize-btn btn-sm">X</a></td>
-                  </tr>
-
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img
-                        src="images/cloth_2.jpg"
-                        alt="Image"
-                        class="img-fluid"
-                      />
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Polo Shirt</h2>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px">
-                        <div class="input-group-prepend">
-                          <button
-                            class="btn btn-outline-primary js-btn-minus"
-                            type="button"
-                          >
-                            &minus;
-                          </button>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control text-center"
-                          value="1"
-                          placeholder=""
-                          aria-label="Example text with button addon"
-                          aria-describedby="button-addon1"
-                        />
-                        <div class="input-group-append">
-                          <button
-                            class="btn btn-outline-primary js-btn-plus"
                             type="button"
                           >
                             &plus;
@@ -189,12 +145,38 @@
 </template>
 
 <script>
-import BreadCrumb from '../components/BreadCrumb.vue';
+import BreadCrumb from "../components/BreadCrumb.vue";
+import json from "./../data/data.json";
 
 export default {
-  name: 'Cart',
+  name: "Cart",
   components: {
     BreadCrumb,
+  },
+  data() {
+    return {
+      cartItems: [],
+    };
+  },
+  created() {
+    var items = JSON.parse(localStorage.getItem("cart"));
+    var dataCartItems = [];
+    // if (items && items.length > 0) {
+    //   dataCartItems = items.map(function (x) {
+    //     console.log(json);
+    //     return {
+    //       ...json.filter((a) => {
+    //         a.id == x.id;
+    //       }),
+    //       qty: x.qty,
+    //       size: x.qty,
+    //     };
+    //   });
+    // }
+
+    console.log(11, items);
+
+    // this.cartItems = dataCartItems;
   },
 };
 </script>

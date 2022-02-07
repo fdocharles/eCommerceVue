@@ -4,10 +4,10 @@
     <bread-crumb currentPage="Account" previousPage="Shop"></bread-crumb>
     <div class="container">
       <h1 class="mb-2 account-user">
-        Hi, {{ accountUser }} &nbsp;&nbsp;&nbsp;({{
+        <!-- Hi, {{ accountUser }} &nbsp;&nbsp;&nbsp;({{
           orders ? orders.length : 0
         }}
-        orders )
+        orders ) -->Order History
       </h1>
       <br />
       <br />

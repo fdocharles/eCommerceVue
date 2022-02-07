@@ -1,12 +1,12 @@
 <template>
   <div class="container login-container" style="margin-top: 10%">
-    <div class="row">
+    <div class="row" >
       <div class="col-md-3"></div>
-      <div class="col-md-6 login-form-1">
+      <div class="col-md-6 login-form-1" style="background-color:#7971ea">
         <div class="row">
           <div class="col-md-6 offset-md-3">
-            <div class="site-logo-login">
-              <a href="index.html" class="js-logo-clone">Shoppers</a>
+            <div class="site-logo-login" style="text-align:center">
+              <a href="index.html" class="js-logo-clone">E-SHOPPER</a>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
           <div class="form-group">
             <p v-if="isInvalidLogin" style="color: red">Invalid credentials</p>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="text-align:center">
             <input
               type="button"
               class="btnSubmit"

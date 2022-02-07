@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <header-bar v-if="isLoggedIn" :user="accountName" />
+    <header-bar />
     <BreadCrumb previousPage="Home" currentPage="Cart" />
     <div class="site-section">
       <div v-if="cartItems && cartItems.length > 0" class="container">
@@ -157,7 +157,6 @@
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
 import HeaderBar from "../components/HeaderBar.vue";
-import json from "./../data/data.json";
 
 export default {
   name: "Cart",
@@ -168,8 +167,6 @@ export default {
   data() {
     return {
       cartItems: [],
-      isLoggedIn: false,
-      accountName: "",
     };
   },
   computed: {

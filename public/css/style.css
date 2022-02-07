@@ -1166,6 +1166,7 @@ a:hover {
 
 .review {
   padding: 30px;
+  border-bottom: 1px solid #ebe2e2;
 }
 
 .account-user {
@@ -1179,4 +1180,8 @@ a:hover {
 
 .color-black {
   color: #000;
+}
+
+.review-star :hover {
+  color: #fdb819;
 }

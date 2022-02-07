@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <header-bar v-if="isLoggedIn" />
+    <header-bar />
     <BreadCrumb :currentPage="currentPage" previousPage="Shop"></BreadCrumb>
     <div class="site-section">
       <div v-if="product" class="container">
@@ -115,7 +115,55 @@
         <br />
         <br />
         <br />
-        <reviews />
+        <div>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="home-tab"
+                data-toggle="tab"
+                href="#home"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+                >Customer Reviews</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <div
+                v-for="review in reviews"
+                v-bind:key="review"
+                class="row review"
+              >
+                <div class="col-md-12">
+                  <p style="font-size: 15px; font-style: italic; margin: 0px">
+                    " {{ review.comment }} "
+                  </p>
+                </div>
+                <div class="col-md-12">
+                  <p style="color: black">
+                    {{ review.name }}
+                    <span
+                      v-for="index in 5"
+                      :key="index"
+                      class="fa fa-star"
+                      v-bind:class="[
+                        index <= review.rating ? 'rating-star-checked' : '',
+                      ]"
+                    ></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </fragment>
@@ -124,14 +172,13 @@
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
 import HeaderBar from "../components/HeaderBar.vue";
-import Reviews from "../components/Reviews.vue";
 import json from "../data/data.json";
 
 var currentProduct = null;
 
 export default {
   name: "Details",
-  components: { BreadCrumb, Reviews, HeaderBar },
+  components: { BreadCrumb, HeaderBar },
   data() {
     return {
       currentPage: this.$route.params.id,
@@ -140,6 +187,7 @@ export default {
       qty: 0,
       isAddToCartDisabled: true,
       isLoggedIn: false,
+      reviews: [],
     };
   },
   methods: {
@@ -185,6 +233,14 @@ export default {
     },
   },
   created() {
+    var products = JSON.parse(localStorage.getItem("products"));
+
+    if (products && products.length > 0) {
+      var tempProduct = products.filter((x) => x.id == this.product.id)[0]
+        .reviews;
+      this.reviews = tempProduct;
+    }
+
     var user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       this.isLoggedIn = true;

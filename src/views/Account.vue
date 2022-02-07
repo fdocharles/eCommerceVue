@@ -4,14 +4,15 @@
     <bread-crumb currentPage="Account" previousPage="Shop"></bread-crumb>
     <div class="container">
       <h1 class="mb-2 account-user">
-        Hi, {{ accountUser }} &nbsp;&nbsp;&nbsp;({{
-          orders ? orders.length : 0
-        }}
-        orders )
+        Hi, {{ accountUser }} &nbsp;&nbsp;&nbsp;<span
+          style="font-size: 20px"
+          v-if="orders && orders.length > 0"
+          >({{ orders ? orders.length : 0 }} orders )</span
+        >
       </h1>
       <br />
       <br />
-      <div id="accordion">
+      <div v-if="orders && orders.length > 0" id="accordion">
         <div class="card" v-for="order in orders" v-bind:key="order.orderNo">
           <div class="card-header" id="headingOne">
             <div class="row">
@@ -78,6 +79,25 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="row">
+          <div class="col-md-6 offset-md-3" style="text-align: center">
+            <h4>No Orders Yet</h4>
+            <h6>Look's like you, haven't made your menu yet</h6>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <a href="/shop">
+              <button class="btn customize-btn btn-sm btn-block">
+                Start Shopping
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       :class="modalClasses"
@@ -86,32 +106,47 @@
       role="dialog"
       style="margin-top: 15%"
     >
-      <div class="modal-dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Review</h4>
-            <button type="button" class="close" @click="toggle()">
-              &times;
+            <h5 class="modal-title" id="exampleModalLabel">
+              {{ reviewItem.name }}
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              @click="toggle(reviewItem)"
+            >
+              <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <div class="row" style="margin-top: 10px">
-              <div class="col-md-1">
-                <img
-                  v-bind:src="reviewItem.image"
-                  alt="Image"
-                  class="img-fluid"
-                  style="height: 80px"
-                />
-              </div>
-              <div class="col-md-9">
-                <h6 class="mb-0 text-black">Product : {{ reviewItem.name }}</h6>
-              </div>
-            </div>
+            <textarea
+              v-model="review"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" @click="toggle()">
-              Close
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="width: 100px; height: 36px; font-size: 14px"
+              @click="addReview"
+            >
+              Review
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              style="width: 100px; height: 36px; font-size: 14px"
+              @click="toggle(reviewItem)"
+            >
+              Cancel
             </button>
           </div>
         </div>
@@ -123,9 +158,11 @@
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
 import HeaderBar from "../components/HeaderBar.vue";
+import ReviewStarRating from "../components/ReviewStarRating.vue";
+
 export default {
   name: "Account",
-  components: { HeaderBar, BreadCrumb },
+  components: { HeaderBar, BreadCrumb, ReviewStarRating },
   data() {
     return {
       isLoggedIn: false,
@@ -134,6 +171,7 @@ export default {
       showModal: false,
       modalClasses: ["modal", "fade"],
       reviewItem: {},
+      review: "",
     };
   },
   methods: {
@@ -144,8 +182,31 @@ export default {
       this.showModal = false;
     },
     showReview() {
-      console.log(this.showModal);
       this.showModal = true;
+    },
+    addReview() {
+      var user = JSON.parse(localStorage.getItem("user"));
+
+      this.reviewItem.reviews = [
+        ...this.reviewItem.reviews,
+        {
+          comment: this.review,
+          id: Math.floor(Math.random() * (1000000 - 10000 + 1)) + 10000,
+          name: user.name,
+          rating: Math.floor(Math.random() * (5 - 0 + 1)) + 0,
+        },
+      ];
+
+      console.log(this.reviewItem);
+
+      var tempProducts = JSON.parse(localStorage.getItem("products"));
+
+      var updatedProducts = tempProducts.map((x) => {
+        return x.id == this.reviewItem.id ? this.reviewItem : x;
+      });
+
+      localStorage.setItem("products", JSON.stringify(updatedProducts));
+      this.toggle(this.reviewItem);
     },
     toggle(item) {
       var products = JSON.parse(localStorage.getItem("products"));
@@ -154,8 +215,6 @@ export default {
       } else {
         this.reviewItem = {};
       }
-
-      console.log(this.reviewItem);
 
       document.body.className += " modal-open";
       let modalClasses = this.modalClasses;

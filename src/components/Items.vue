@@ -77,10 +77,6 @@ export default {
       products: json,
     };
   },
-  mounted: () => {
-    console.log("mounted");
-
-    console.log(json);
-  },
+  mounted: () => {},
 };
 </script>

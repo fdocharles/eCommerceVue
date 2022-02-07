@@ -1,35 +1,21 @@
-<template>
-  <div>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item">
-        <a
-          class="nav-link active"
-          id="home-tab"
-          data-toggle="tab"
-          href="#home"
-          role="tab"
-          aria-controls="home"
-          aria-selected="true"
-          >Customer Reviews</a
-        >
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div
-        class="tab-pane fade show active"
-        id="home"
-        role="tabpanel"
-        aria-labelledby="home-tab"
-      >
-        <review />
-      </div>
-    </div>
-  </div>
-</template>
+<template></template>
 <script>
-import Review from "./Review.vue";
 export default {
-  components: { Review },
   name: "Reviews",
+  props: ["id"],
+  data() {
+    return {
+      reviews: [],
+    };
+  },
+  create() {
+    var products = JSON.parse(localStorage.getItem("products"));
+
+    if (products && products.length > 0) {
+      console.log(products.filter((x) => x.id == this.props.id));
+    }
+
+    this.reviews = [1, 2, 3, 4];
+  },
 };
 </script>

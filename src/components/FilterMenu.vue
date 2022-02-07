@@ -9,20 +9,6 @@
         <div class="col-md-3 order-1 mb-5 mb-md-0">
           <div class="border p-4 rounded mb-4">
             <div class="mb-4">
-              <h3 class="mb-3 h6 text-uppercase text-black d-block">
-                Filter by Price
-              </h3>
-              <div id="slider-range" class="border-primary"></div>
-              <input
-                type="text"
-                name="text"
-                id="amount"
-                class="form-control border-0 pl-0 bg-white"
-                disabled=""
-              />
-            </div>
-
-            <div class="mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Size</h3>
               <label for="s_sm" class="d-flex">
                 <input type="checkbox" id="s_sm" class="mr-2 mt-1" />

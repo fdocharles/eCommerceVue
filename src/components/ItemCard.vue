@@ -3,7 +3,7 @@
     <div class="block-4">
       <figure class="block-4-image">
         <a v-bind:href="redirect(id)">
-          <img v-bind:src="image" alt="Image placeholder" class="img-fluid"/>
+          <img v-bind:src="image" alt="Image placeholder" class="img-fluid" />
         </a>
       </figure>
       <div>
@@ -43,8 +43,6 @@ export default {
       return this.props.image;
     },
   },
-  created() {
-    //console.log(this.itemprop);
-  },
+  created() {},
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <header-bar v-if="isLoggedIn" />
+    <header-bar />
     <banner />
     <FeaturedProducts />
   </fragment>
@@ -12,8 +12,6 @@ import FeaturedProducts from "../components/FeaturedProducts.vue";
 import HeaderBar from "../components/HeaderBar.vue";
 import json from "./../data/data.json";
 
-console.log(localStorage.getItem("products"));
-
 export default {
   name: "Home",
   components: {
@@ -22,18 +20,9 @@ export default {
     HeaderBar,
   },
   data() {
-    return {
-      isLoggedIn: false,
-    };
+    return {};
   },
   created() {
-    var user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
-
     if (!localStorage.getItem("products")) {
       localStorage.setItem("products", JSON.stringify(json));
     }

@@ -1169,4 +1169,14 @@ a:hover {
 }
 
 .account-user {
+  margin-top: 35px;
+}
+
+.success-order-no-title {
+  color: #000;
+  margin-top: 12px;
+}
+
+.color-black {
+  color: #000;
 }

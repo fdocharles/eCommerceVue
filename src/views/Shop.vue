@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <header-bar v-if="isLoggedIn" />
+    <header-bar />
     <BreadCrumb previousPage="Home" currentPage="Shop" />
     <FilterMenu />
   </fragment>
@@ -19,16 +19,11 @@ export default {
     HeaderBar,
   },
   data() {
-    return {
-      isLoggedIn: false,
-    };
+    return {};
   },
   created() {
-    var user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
+    if (localStorage.getItem("products")) {
+      localStorage.setItem("products", JSON.stringify(json));
     }
   },
 };

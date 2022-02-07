@@ -3,7 +3,7 @@
     <header-bar v-if="isLoggedIn" :user="accountName" />
     <BreadCrumb previousPage="Home" currentPage="Cart" />
     <div class="site-section">
-      <div v-if="cartItems.length > 0" class="container">
+      <div v-if="cartItems && cartItems.length > 0" class="container">
         <div class="row mb-5">
           <div class="col-md-12">
             <div class="site-blocks-table">
@@ -126,7 +126,7 @@
                   <div class="col-md-12">
                     <button
                       class="btn customize-btn btn-lg py-3 btn-block"
-                      onclick="window.location='checkout.html'"
+                      @click="placeOrder"
                     >
                       Place Order
                     </button>
@@ -210,6 +210,37 @@ export default {
 
       localStorage.setItem("cart", JSON.stringify(this.cartItems));
     },
+    placeOrder() {
+      var subTot = this.cartItems.reduce((acc, curr) => {
+        return acc + curr.price * curr.qty;
+      }, 0.0);
+
+      var orders = JSON.parse(localStorage.getItem("orders"));
+      var currOrder = {
+        orderNo: Math.floor(Math.random() * (1000000 - 10000 + 1)) + 10000,
+        status: "Ordered",
+        cart: this.cartItems,
+        total: (subTot + (subTot / 100) * 13).toFixed(2),
+        orderDate: new Date().toLocaleDateString("en-us", {
+          weekday: "long",
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }),
+      };
+
+      if (orders) {
+        localStorage.setItem("orders", JSON.stringify([...orders, currOrder]));
+      } else {
+        localStorage.setItem("orders", JSON.stringify([currOrder]));
+      }
+
+      localStorage.setItem("lastOrderNumber", currOrder.orderNo);
+      localStorage.removeItem("cart", []);
+
+      this.$router.push("Success");
+      location.reload();
+    },
   },
   created() {
     var user = JSON.parse(localStorage.getItem("user"));
@@ -220,8 +251,6 @@ export default {
       this.isLoggedIn = false;
       this.accountName = "";
     }
-
-    console.log("user", user);
 
     this.cartItems = JSON.parse(localStorage.getItem("cart"));
   },

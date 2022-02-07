@@ -55,31 +55,23 @@
 
 <script>
 import FeaturedItemCard from "./FeaturedItemCard.vue";
-import json from "./../data/data.json";
-
-var fProducts = [
-  {
-    Category: "Angle Grinders",
-    Title: "SPORT BODY PARTS FO SHEVROLET 2015-2017",
-    Price: "$ 45",
-    Rating: 5,
-    Image:
-      "https://chromium.themes.zone/toolshop/wp-content/uploads/sites/14/2017/06/prod_3-300x300.jpg",
-  },
-];
 
 export default {
   components: { FeaturedItemCard },
   name: "FeaturedProduct",
   data() {
     return {
-      featuredProducts: json.filter((x) => x.featured),
+      featuredProducts: [],
     };
   },
   methods: {
     redirect(id) {
       return "/shop/" + id;
     },
+  },
+  created() {
+    var products = JSON.parse(localStorage.getItem("products"));
+    this.featuredProducts = products ? products : [];
   },
 };
 </script>

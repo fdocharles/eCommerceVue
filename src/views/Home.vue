@@ -10,6 +10,7 @@
 import Banner from "../components/Banner.vue";
 import FeaturedProducts from "../components/FeaturedProducts.vue";
 import HeaderBar from "../components/HeaderBar.vue";
+import json from "./../data/data.json";
 
 console.log(localStorage.getItem("products"));
 
@@ -31,6 +32,10 @@ export default {
       this.isLoggedIn = true;
     } else {
       this.isLoggedIn = false;
+    }
+
+    if (!localStorage.getItem("products")) {
+      localStorage.setItem("products", JSON.stringify(json));
     }
   },
 };

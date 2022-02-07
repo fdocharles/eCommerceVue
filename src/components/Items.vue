@@ -1,10 +1,10 @@
 <template>
   <div class="row mb-5">
     <ItemCard
-      v-for="product in products" 
+      v-for="product in products"
       v-bind:key="product.id"
       v-bind:id="product.id"
-      v-bind:name="product.title"
+      v-bind:name="product.name"
       v-bind:image="product.image"
       v-bind:category="product.category"
       v-bind:rating="product.rating"

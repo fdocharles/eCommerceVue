@@ -1,7 +1,10 @@
 <template>
   <div
     class="site-blocks-cover"
-    style="background-image: url(images/The-Future-of-Commerce-is-Shoppable-Ads.jpg)">
+    style="
+      background-image: url(images/The-Future-of-Commerce-is-Shoppable-Ads.jpg);
+    "
+  >
     <div class="container">
       <div
         class="row align-items-start align-items-md-center justify-content-end"
@@ -14,7 +17,7 @@
               at iaculis quam. Integer accumsan tincidunt fringilla.
             </p>
             <p>
-              <a href="#" class="btn btn-sm btn-primary">Shop Now</a>
+              <a href="/shop" class="btn btn-sm btn-primary">Shop Now</a>
             </p>
           </div>
         </div>

@@ -12,13 +12,13 @@
               class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center"
             >
               <div class="site-logo">
-                <a href="index.html" class="js-logo-clone">E-Shopper</a>
+                <a href="/" class="js-logo-clone">E-Shopper</a>
               </div>
             </div>
 
             <header-bar-controls
               v-on:updateCartCount="updateCartCount"
-              :user="user"
+              :user="accountName"
             />
           </div>
         </div>
@@ -35,7 +35,6 @@ import HeaderBarControls from "./HeaderBarControls.vue";
 
 export default {
   name: "HeaderBar",
-  props: ["user"],
   components: {
     MenuBar,
     Login,
@@ -44,6 +43,7 @@ export default {
   data() {
     return {
       cartCount: 0,
+      accountName: "",
     };
   },
   methods: {
@@ -51,6 +51,16 @@ export default {
       var length = JSON.parse(localStorage.getItem("cart")).length;
       this.cartCount = length > 0 ? length : 0;
     },
+  },
+  created() {
+    var user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.isLoggedIn = true;
+      this.accountName = user.name;
+    } else {
+      this.isLoggedIn = false;
+      this.accountName = "";
+    }
   },
 };
 </script>

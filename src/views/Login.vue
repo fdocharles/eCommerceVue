@@ -62,7 +62,6 @@ export default {
       if (!this.email || !this.password) {
         this.isInvalidLogin = true;
       } else {
-        console.log(333);
         this.isInvalidLogin = false;
         this.$router.push("Shop");
         localStorage.setItem(

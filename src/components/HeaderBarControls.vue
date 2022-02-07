@@ -2,14 +2,22 @@
   <div class="col-6 col-md-4 order-3 order-md-3 text-right">
     <div class="site-top-icons">
       <ul>
-        <li>
+        <li v-if="isUserLoggedIn">
           <a href="/account"
             ><span
               class="icon icon-person icon-color"
               style="color: black; font-size: 30px"
             ></span
-            >{{ user ? "Hi " + user : "" }}</a
+            >{{ user ? "Hi " + user.name : "" }}</a
           >
+        </li>
+        <li v-else>
+          <a href="/login"
+            ><span
+              class="icon icon-person icon-color"
+              style="color: black; font-size: 30px"
+            ></span
+          ></a>
         </li>
         <li>
           <a href="/cart" class="site-cart">
@@ -32,6 +40,16 @@
 <script>
 export default {
   name: "HeaderBarControls",
-  props: ["user"],
+  data() {
+    return {
+      user: {},
+      isUserLoggedIn: false,
+    };
+  },
+  created() {
+    var currUser = JSON.parse(localStorage.getItem("user"));
+    this.user = currUser ? currUser : {};
+    this.isUserLoggedIn = currUser ? true : false;
+  },
 };
 </script>

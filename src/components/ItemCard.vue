@@ -2,11 +2,10 @@
   <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
     <div class="block-4">
       <figure class="block-4-image">
-        <a href="shop-single.html">
-          <img v-bind:src="image" alt="Image placeholder"
-            class="img-fluid"/>
+        <a v-bind:href="redirect(id)">
+          <img v-bind:src="image" alt="Image placeholder" class="img-fluid"/>
         </a>
-      </figure>       
+      </figure>
       <div>
         <p class="mb-0 item-card-category-text">{{ category }}</p>
         <p class="item-card-header">
@@ -29,12 +28,19 @@
 <script>
 export default {
   name: "ItemCard",
-  props: ["id", "name" , "image" , "category" , "rating" , "description" , "price"],
-  
+  props: ["id", "name", "category", "price", "rating", "image"],
+  data() {
+    return {
+      item: this.itemprop,
+    };
+  },
   computed: {},
   methods: {
     redirect(id) {
       return "/shop/" + id;
+    },
+    getImage() {
+      return this.props.image;
     },
   },
   created() {

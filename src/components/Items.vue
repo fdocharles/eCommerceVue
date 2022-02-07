@@ -16,6 +16,8 @@
 
 <script>
 import ItemCard from "./ItemCard.vue";
+import json from "./../data/data.json";
+
 export default {
   name: "Items",
   components: { ItemCard },
@@ -72,16 +74,13 @@ export default {
   // },
   data() {
     return {
-      //item: this.itemprop,
-      products : []
+      products: json,
     };
   },
-  mounted(){
-    fetch('http://localhost:3000/products')
-    .then((res) => res.json())
-    .then(data => this.products = data)
-    .catch(console.log(err.message))
-    
+  mounted: () => {
+    console.log("mounted");
+
+    console.log(json);
   },
 };
 </script>

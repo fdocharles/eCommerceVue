@@ -20,7 +20,7 @@
           ></a>
         </li>
         <li>
-          <a href="/cart" class="site-cart">
+          <a href="/checkout" class="site-cart">
             <span
               class="icon icon-shopping_cart icon-color"
               style="color: black; font-size: 30px"

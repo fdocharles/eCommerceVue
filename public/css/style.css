@@ -1186,3 +1186,7 @@ a:hover {
 .review-star :hover {
   color: #fdb819;
 }
+
+.star-rating-wrapper {
+  margin-bottom: 10px;
+}

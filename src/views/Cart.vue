@@ -1,7 +1,7 @@
 <template>
   <fragment>
     <header-bar />
-    <BreadCrumb previousPage="Home" currentPage="Cart" />
+    <BreadCrumb previousPage="Home" currentPage="Checkout" />
     <div class="site-section">
       <div v-if="cartItems && cartItems.length > 0" class="container">
         <div class="row mb-5">
@@ -29,11 +29,16 @@
                       />
                     </td>
                     <td class="product-name">
-                      <h2 class="h5 text-black" style="text-align:left">{{item.name}}</h2>
+                      <h2 class="h5 text-black" style="text-align: left">
+                        {{ item.name }}
+                      </h2>
                     </td>
                     <td>$ {{ item.price }}</td>
                     <td>
-                      <div class="input-group mb-3" style="max-width: 120px;text-align:center">
+                      <div
+                        class="input-group mb-3"
+                        style="max-width: 120px; text-align: center"
+                      >
                         <div class="input-group-prepend">
                           <button
                             class="btn cus-btn-outline-primary"

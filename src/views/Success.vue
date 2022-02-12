@@ -1,11 +1,13 @@
 <template>
   <fragment>
-    <header-bar v-if="isLoggedIn" :user="accountName" />
+    <header-bar />
     <div class="container">
       <div class="row">
-        <div class="col-md-6 offset-md-3 text-center">
-          <h1 class="success-order-no-title">Order Placed Successfully !</h1>
-          <h5 style="margin-top: 10px">Your Order No : {{ orderNo }}</h5>
+        <div class="col-md-6 offset-md-3 text-center" style="margin-top: 100px">
+          <h1 class="success-order-no-title" sty>
+            Order Placed Successfully !
+          </h1>
+          <h5 style="margin-top: 30px">Your Order No : {{ orderNo }}</h5>
         </div>
       </div>
     </div>
@@ -20,20 +22,10 @@ export default {
   name: "Success",
   data() {
     return {
-      accountName: "",
       orderNo: 0,
     };
   },
   created() {
-    var user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      this.isLoggedIn = true;
-      this.accountName = user.name;
-    } else {
-      this.isLoggedIn = false;
-      this.accountName = "";
-    }
-
     this.cartItems = JSON.parse(localStorage.getItem("cart"));
     this.orderNo = localStorage.getItem("lastOrderNumber");
   },

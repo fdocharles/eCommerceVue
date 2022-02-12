@@ -1,5 +1,5 @@
 <template>
-  <div class="row">&copy; All rights reserved</div>
+  <div class="row"></div>
 </template>
 
 <script>

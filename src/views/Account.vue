@@ -123,6 +123,20 @@
             </button>
           </div>
           <div class="modal-body">
+            <div class="star-rating-wrapper">
+              Rating :
+              <star-rating
+                v-model="userRating"
+                :show-rating="false"
+                :rounded-corners="true"
+                :star-points="[
+                  23, 2, 14, 17, 0, 19, 10, 34, 7, 50, 23, 43, 38, 50, 36, 34,
+                  46, 19, 31, 17,
+                ]"
+                :star-size="25"
+                :inline="true"
+              ></star-rating>
+            </div>
             <textarea
               v-model="review"
               class="form-control"
@@ -158,11 +172,11 @@
 <script>
 import BreadCrumb from "../components/BreadCrumb.vue";
 import HeaderBar from "../components/HeaderBar.vue";
-import ReviewStarRating from "../components/ReviewStarRating.vue";
+import StarRating from "vue-star-rating";
 
 export default {
   name: "Account",
-  components: { HeaderBar, BreadCrumb, ReviewStarRating },
+  components: { HeaderBar, BreadCrumb, StarRating },
   data() {
     return {
       isLoggedIn: false,
@@ -172,6 +186,7 @@ export default {
       modalClasses: ["modal", "fade"],
       reviewItem: {},
       review: "",
+      userRating: 0,
     };
   },
   methods: {
@@ -193,7 +208,7 @@ export default {
           comment: this.review,
           id: Math.floor(Math.random() * (1000000 - 10000 + 1)) + 10000,
           name: user.name,
-          rating: Math.floor(Math.random() * (5 - 0 + 1)) + 0,
+          rating: this.userRating,
         },
       ];
 
